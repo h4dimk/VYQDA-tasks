@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table with React</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Root div for React app -->
+    <div id="root"></div>
+
+    <!-- React and ReactDOM via CDN -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- React code -->
+    <script type="text/javascript">
+      const { useState } = React;
+      const { createRoot } = ReactDOM;
+
+      function EditableTable() {
+        const initialData = [
+          { id: 1, topic: "Onboarding Call", data: Array(6).fill("") },
+          {
+            id: 2,
+            topic: "Google Search Console Access",
+            data: Array(6).fill(""),
+          },
+          { id: 3, topic: "Google Analytics Access", data: Array(6).fill("") },
+          { id: 4, topic: "Website Access", data: Array(6).fill("") },
+          { id: 5, topic: "Technical Audit", data: Array(6).fill("") },
+          { id: 6, topic: "Anchor Text/URL Mapping", data: Array(6).fill("") },
+          {
+            id: 7,
+            topic: "Google Data Studio Report + Local Reporting Suite",
+            data: Array(6).fill(""),
+          },
+          { id: 8, topic: "Site Level Optimization", data: Array(6).fill("") },
+          { id: 9, topic: "On Page Optimization", data: Array(6).fill("") },
+          { id: 10, topic: "Content Creation", data: Array(6).fill("") },
+          { id: 11, topic: "Content Publishing", data: Array(6).fill("") },
+          { id: 12, topic: "Premium Press Release", data: Array(6).fill("") },
+          {
+            id: 13,
+            topic: "Authority Niche Placements",
+            data: Array(6).fill(""),
+          },
+          { id: 14, topic: "Review Management", data: Array(6).fill("") },
+          { id: 15, topic: "Index Links", data: Array(6).fill("") },
+          { id: 16, topic: "Video Recap", data: Array(6).fill("") },
+        ];
+
+        const [data, setData] = useState(initialData);
+
+        const handleInputChange = (e, rowIndex, colIndex) => {
+          const newData = data.map((row, i) => {
+            if (i === rowIndex) {
+              const newRowData = [...row.data];
+              newRowData[colIndex] = e.target.value;
+              return { ...row, data: newRowData };
+            }
+            return row;
+          });
+          setData(newData);
+        };
+
+        const handleSubmit = () => {
+          console.log("Data ready to post to API:", data);
+          // Placeholder for API call
+        };
+
+        return React.createElement(
+          "div",
+          { style: { padding: "20px" } },
+
+          React.createElement(
+            "table",
+            { className: "table" },
+            React.createElement(
+              "thead",
+              null,
+              React.createElement(
+                "tr",
+                null,
+                React.createElement("th", null, "MONTH 1"),
+                ...Array.from({ length: 6 }, (_, i) =>
+                  React.createElement("th", { key: i }, `Column ${i + 1}`)
+                )
+              )
+            ),
+            React.createElement(
+              "tbody",
+              null,
+              data.map((row, rowIndex) =>
+                React.createElement(
+                  "tr",
+                  { key: row.id },
+                  React.createElement("td", null, row.topic),
+                  ...row.data.map((cell, colIndex) =>
+                    React.createElement(
+                      "td",
+                      { key: colIndex },
+                      React.createElement("input", {
+                        type: "text",
+                        value: cell,
+                        onChange: (e) =>
+                          handleInputChange(e, rowIndex, colIndex),
+                        className: "input-cell",
+                      })
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          React.createElement("br", null),
+          React.createElement(
+            "button",
+            { onClick: handleSubmit },
+            "Submit Data"
+          )
+        );
+      }
+
+      const container = document.getElementById("root");
+      const root = createRoot(container);
+      root.render(React.createElement(EditableTable));
+    </script>
+  </body>
+</html>
