@@ -13,7 +13,7 @@ This repository contains solutions for three React.js tasks, each demonstrating 
    - `<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>`
    - `<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>`
 3. Follow the [React documentation](https://reactjs.org/docs/add-react-to-a-website.html) for integrating React.js into an HTML page.
-4. Implement a table or div format where every column is editable.
+4. Implement a table format where every column is editable.
 5. The frontend should be prepared to post the edited data to an API endpoint (backend implementation is not required).
 
 ### Folder Structure
